@@ -1,0 +1,42 @@
+{
+	"name": "project-settings",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "문종현 <dobest27@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"format": "prettier --write \"**/*.{ts,js,css,md}\"",
+		"lint": "eslint . --cache --fix",
+		"pretest": "npm run lint",
+		"posttest": "npm run format"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@commitlint/cli": "^8.2.0",
+		"@commitlint/config-conventional": "^8.2.0",
+		"@typescript-eslint/eslint-plugin": "^2.6.1",
+		"@typescript-eslint/parser": "^2.6.1",
+		"eslint": "^6.6.0",
+		"eslint-config-airbnb-base": "^14.0.0",
+		"eslint-plugin-import": "^2.18.2",
+		"husky": ">=1",
+		"lint-staged": ">=8",
+		"prettier": "^1.19.1"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,jsx,css,md}": [
+			"prettier --write",
+			"git add"
+		],
+		"*.{ts,tsx,js,jsx}": [
+			"eslint --fix",
+			"git add"
+		]
+	}
+}
